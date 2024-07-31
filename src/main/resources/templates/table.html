@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск товаров</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"], select, input[type="number"] {
+            width: 500px;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            width: 150px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="range"] {
+            width: 200px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        #sortForm {
+            position: absolute;
+            right: 0;
+        }
+
+        #selectSort {
+            width: 200px;
+            margin-right: 50px;
+        }
+
+        #buttonSort {
+            width: 200px;
+            margin-right: 50px;
+            margin-left: auto;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="/table" method="post">
+        <h2>Поиск предмета</h2>
+        <label for="name">Название:</label>
+        <input name="name" type="text" placeholder="Название предмета" id="name">
+        <label for="min">Минимальная цена:</label>
+        <input name="minPrice" type="number" placeholder="Минимальная цена" value="0" id="min">
+        <label for="max">Максимальная цена:</label>
+        <input name="maxPrice" type="number" placeholder="Максимальная цена" value="0" id="max">
+        <label for="quantity">Кол-во записей:</label>
+        <br>
+        <input type="range" id="quantity" name="quantity" min="1" max="80" step="1" oninput="updateValue(this.value)">
+        <span id="rangeValue">40</span>
+        <br>
+        <label for="selectInput">Тип предмета:</label>
+        <select name="type" id="selectInput">
+            <option value="weapon_ak47">ak-47</option>
+            <option value="weapon_m4a1_silencer">m4a1-s</option>
+            <option value="weapon_m4a1">m4a1</option>
+            <option value="weapon_awp">awp</option>
+            <option value="weapon_deagle">deagle</option>
+            <option value="csgo_type_weaponcase">weaponcase</option>
+            <option value="type_customplayer">agent</option>
+            <option value="weapon_galilar">galilar</option>
+            <option value="weapon_aug">aug</option>
+            <option value="weapon_famas">famas</option>
+            <option value="weapon_ssg08">ssg08</option>
+            <option value="weapon_g3sg1">g3sg1</option>
+            <option value="weapon_sg556">sg556</option>
+            <option value="weapon_scar20">scar20</option>
+            <option value="weapon_glock">glock</option>
+            <option value="weapon_p250">p250</option>
+            <option value="weapon_revolver">revolver</option>
+            <option value="weapon_elite">dual-berets</option>
+            <option value="weapon_zeus">zeus</option>
+            <option value="weapon_usp_silencer">usp-s</option>
+            <option value="weapon_fiveseven">fiveseven</option>
+            <option value="weapon_tec9">tec9</option>
+            <option value="weapon_cz75a">cz75a</option>
+            <option value="weapon_mp9">mp9</option>
+            <option value="weapon_ump45">ump45</option>
+            <option value="weapon_mp7">mp7</option>
+            <option value="weapon_mp5sd">mp5sd</option>
+            <option value="weapon_mac10">mac10</option>
+            <option value="weapon_p90">p90</option>
+            <option value="weapon_bizon">bizon</option>
+            <option value="weapon_xm1014">xm1014</option>
+            <option value="weapon_mag7">mag7</option>
+            <option value="weapon_sawedoff">sawedoff</option>
+            <option value="weapon_nova">nova</option>
+            <option value="weapon_negev">negev</option>
+            <option value="csgo_type_ticket">ticket</option>
+            <option value="csgo_tool_patch">patch</option>
+            <option value="csgo_type_musickit">musickit</option>
+            <option value="csgo_type_spray">spray</option>
+            <option value="knife">knife</option>
+            <option value="hands">hands</option>
+        </select>
+        <input type="submit" value="Поиск">
+    </form>
+    <br>
+    <br>
+    <form action="/sort" method="post" id="sortForm">
+        <label for="selectSort">Тип сортировки:</label>
+        <select name="typeSort" id="selectSort">
+            <option value="Buff"> Buff</option>
+            <option value="Steam"> Steam</option>
+        </select>
+        <input type="submit" value="Сортировать" id="buttonSort">
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <table>
+        <thead>
+        <tr>
+            <th>Названия</th>
+            <th>Изображение</th>
+            <th>Buff</th>
+            <th>Steam</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tbody>
+        <tr th:if="${results==null}">
+            <td colspan="4" th:text="${message}"></td>
+        </tr>
+        <tr th:each="str : ${results}">
+
+            <td><a th:href="@{${str.steamHref}}">[[${str.name}]]</a></td>
+            <td><img th:src="@{${str.imageHref}}" width="200" height="100" alt=""/></td>
+            <td><span th:text="${str.buffPrice}"> Buff price </span></td>
+            <td><span th:text="${str.steamPrice}"> Steam price </span></td>
+        </tr>
+        </tbody>
+    </table>
+    <p th:if="${maxPercentage.name!=null && results!=null}">Самая выгодная перепродажа <span
+            th:text="${maxPercentage.name}"></span>: <span th:text="${maxPercentage.firstMarket}"></span> ---> <span
+            th:text="${maxPercentage.secondMarket}"></span> с выгодой <span th:text="${maxPercentage.percent}"></span>%
+    </p>
+</div>
+
+<script>
+    function updateValue(newValue) {
+        let rangeValueElement = document.getElementById("rangeValue");
+        rangeValueElement.innerHTML = newValue;
+    }
+</script>
+</body>
+</html>
