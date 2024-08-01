@@ -33,7 +33,7 @@ public class MainService {
         if (buffItem == null) {
             return null;
         }
-        String realName=buffItem.getName();
+        String realName = buffItem.getName();
         double roundBuffPrice = Math.round(buffItem.getBuffPrice() * valuteCourse.getUah() * 100.0) / 100.0;
         double roundSteamPrice = Math.round(buffItem.getSteamPrice() * valuteCourse.getUah() * 100.0) / 100.0;
         tableString.setName(buffItem.getName());
@@ -80,7 +80,7 @@ public class MainService {
     public Resale findMaxPercentageAtAll() {
         double maxPercentage = Double.MIN_VALUE;
         Resale resale = new Resale();
-        if (strings==null){
+        if (strings == null) {
             return null;
         }
         for (TableString string : strings) {

@@ -17,7 +17,7 @@ public class TableString {
         this.imageHref = imageHref;
     }
 
-    public TableString(String name, double buffPrice, double steamPrice,  String steamHref, String imageHref) {
+    public TableString(String name, double buffPrice, double steamPrice, String steamHref, String imageHref) {
         this.name = name;
         this.buffPrice = buffPrice;
         this.steamPrice = steamPrice;
@@ -59,7 +59,6 @@ public class TableString {
     public void setSteamPrice(double steamPrice) {
         this.steamPrice = steamPrice;
     }
-
 
 
     public void setSteamHref(String steamHref) {

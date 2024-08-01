@@ -172,7 +172,6 @@
             <td colspan="4" th:text="${message}"></td>
         </tr>
         <tr th:each="str : ${results}">
-
             <td><a th:href="@{${str.steamHref}}">[[${str.name}]]</a></td>
             <td><img th:src="@{${str.imageHref}}" width="200" height="100" alt=""/></td>
             <td><span th:text="${str.buffPrice}"> Buff price </span></td>
