@@ -1,8 +1,11 @@
 package com.example.parser.controller;
 
+import com.example.parser.entity.ItemCategory;
 import com.example.parser.entity.Resale;
 import com.example.parser.entity.TableString;
 import com.example.parser.service.MainService;
+import com.example.parser.service.buff.BuffJsonParser;
+import com.example.parser.service.buff.BuffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +19,6 @@ import java.util.Objects;
 
 @Controller
 public class MainController {
-    private final MainService mainService;
-
-    @Autowired
-    public MainController(MainService mainService) {
-        this.mainService = mainService;
-    }
 
     @GetMapping("/table")
     public String initTable(Model model) {
@@ -32,6 +29,7 @@ public class MainController {
 
     @PostMapping("/table")
     public String showTable(@RequestParam(required = false) String name, @RequestParam(required = false) double minPrice, @RequestParam(required = false) double maxPrice, @RequestParam(required = false) int quantity, @RequestParam(required = false) String type, Model model) throws IOException, InterruptedException {
+        MainService mainService=new MainService(new BuffService(new BuffJsonParser(), new ItemCategory()));
         ArrayList<TableString> tableStrings;
         if (Objects.equals(name, "")) {
             tableStrings = (ArrayList<TableString>) mainService.searchWithParams(minPrice, maxPrice, quantity, type);
@@ -51,7 +49,8 @@ public class MainController {
     }
 
     @PostMapping("/sort")
-    public String sortTable(@RequestParam String typeSort, Model model) {
+    public String sortTable(@RequestParam String typeSort, Model model) throws IOException, InterruptedException {
+        MainService mainService=new MainService(new BuffService(new BuffJsonParser(), new ItemCategory()));
         mainService.sortTable(typeSort);
         model.addAttribute("results", mainService.getStrings());
         return "/table";
