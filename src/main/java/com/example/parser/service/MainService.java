@@ -33,7 +33,6 @@ public class MainService {
         if (buffItem == null) {
             return null;
         }
-        String realName = buffItem.getName();
         double roundBuffPrice = Math.round(buffItem.getBuffPrice() * valuteCourse.getUah() * 100.0) / 100.0;
         double roundSteamPrice = Math.round(buffItem.getSteamPrice() * valuteCourse.getUah() * 100.0) / 100.0;
         tableString.setName(buffItem.getName());
@@ -55,7 +54,6 @@ public class MainService {
         }
         List<TableString> tableStrings = new ArrayList<>();
         for (BuffItem buffItem : buffItems) {
-            String name = buffItem.getName();
             double roundBuffPrice = Math.round(buffItem.getBuffPrice() * valuteCourse.getUah() * 100.0) / 100.0;
             double roundSteamPrice = Math.round(buffItem.getSteamPrice() * valuteCourse.getUah() * 100.0) / 100.0;
             TableString tableString = new TableString(buffItem.getName(), roundBuffPrice, roundSteamPrice, buffItem.getSteamHref(), buffItem.getImageHref());
@@ -68,12 +66,8 @@ public class MainService {
 
     public void sortTable(String type) {
         switch (type) {
-            case "Buff":
-                strings.sort(Comparator.comparing(TableString::getBuffPrice));
-                break;
-            case "Steam":
-                strings.sort(Comparator.comparing(TableString::getSteamPrice));
-                break;
+            case "Buff" -> strings.sort(Comparator.comparing(TableString::getBuffPrice));
+            case "Steam" -> strings.sort(Comparator.comparing(TableString::getSteamPrice));
         }
     }
 

@@ -23,9 +23,6 @@ public class BuffJsonParser {
     public List<BuffItem> parseResponseToList(String body) {
         ArrayList<BuffItem> list = new ArrayList<>();
         JSONObject object = new JSONObject(body);
-        if (object.keySet().contains("error")) {
-            return list;
-        }
         JSONObject data = object.getJSONObject("data");
         JSONArray items = data.getJSONArray("items");
         for (int i = 0; i < items.length(); i++) {
