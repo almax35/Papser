@@ -1,7 +1,7 @@
 package com.example.parser.service.exchange;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class ExchangeService {
     private final ExchangeJsonParser exchangeJsonParser;
 

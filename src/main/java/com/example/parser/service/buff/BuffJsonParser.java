@@ -3,12 +3,12 @@ package com.example.parser.service.buff;
 import com.example.parser.entity.BuffItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class BuffJsonParser {
     public BuffItem parseJsonBuff(JSONObject object) {
         String name = object.getString("name");

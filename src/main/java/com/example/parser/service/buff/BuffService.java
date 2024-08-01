@@ -5,7 +5,7 @@ import com.example.parser.entity.BuffItem;
 import com.example.parser.entity.ItemCategory;
 import com.example.parser.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -16,7 +16,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-@Component
+@Service
 public class BuffService implements IService {
     private final BuffJsonParser buffJsonParser;
     private final ItemCategory category;

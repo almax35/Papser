@@ -1,9 +1,9 @@
 package com.example.parser.service.exchange;
 
 import org.json.JSONObject;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class ExchangeJsonParser {
     public double getCnyToRub(String body) {
         JSONObject object = new JSONObject(body);

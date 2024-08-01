@@ -6,14 +6,14 @@ import com.example.parser.entity.TableString;
 import com.example.parser.entity.ValuteCourse;
 import com.example.parser.service.buff.BuffService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-@Component
+@Service
 public class MainService {
     private final BuffService buffService;
     private final ValuteCourse valuteCourse;
