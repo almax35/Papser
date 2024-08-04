@@ -48,7 +48,6 @@
         }
 
         table {
-            width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
@@ -157,25 +156,27 @@
     <br>
     <br>
     <br>
-    <table>
+    <table >
         <thead>
         <tr>
-            <th>Названия</th>
-            <th>Изображение</th>
-            <th>Buff</th>
-            <th>Steam</th>
+            <th style="width:350px">Название</th>
+            <th style="width:250px">Изображение</th>
+            <th style="width:75px">Buff</th>
+            <th style="width:75px">Steam</th>
+            <th style="width:125px">Сохранить в избранное</th>
         </tr>
         </thead>
         <tbody>
         <tbody>
         <tr th:if="${results==null}">
-            <td colspan="4" th:text="${message}"></td>
+            <td colspan="5" th:text="${message}"></td>
         </tr>
         <tr th:each="str : ${results}">
-            <td><a th:href="@{${str.steamHref}}">[[${str.name}]]</a></td>
-            <td><img th:src="@{${str.imageHref}}" width="200" height="100" alt=""/></td>
-            <td><span th:text="${str.buffPrice}"> Buff price </span></td>
-            <td><span th:text="${str.steamPrice}"> Steam price </span></td>
+            <td style="width:350px"><a th:href="@{${str.steamHref}}">[[${str.name}]]</a></td>
+            <td style="width:250px"><img th:src="@{${str.imageHref}}" width="250" height="100" alt=""/></td>
+            <td style="width:75px"><span th:text="${str.buffPrice}"> Buff price </span></td>
+            <td style="width:75px"><span th:text="${str.steamPrice}"> Steam price </span></td>
+            <td style="width:125px"><img th:src="@{/iconSave.png}" width="125" height="100"></td>
         </tr>
         </tbody>
     </table>
