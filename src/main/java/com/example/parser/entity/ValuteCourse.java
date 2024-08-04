@@ -2,10 +2,10 @@ package com.example.parser.entity;
 
 import com.example.parser.service.exchange.ExchangeJsonParser;
 import com.example.parser.service.exchange.ExchangeService;
+import lombok.Data;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
-
+@Data
 @Component
 public class ValuteCourse {
     private final double uah;
@@ -16,7 +16,4 @@ public class ValuteCourse {
 
     }
 
-    public double getUah() {
-        return uah;
-    }
 }

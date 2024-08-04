@@ -1,13 +1,29 @@
 package com.example.parser.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
+@Data
+@Entity (name = "item")
 @Component
 public class TableString {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @NotNull
     private String name;
+    @NotNull
     private double buffPrice;
+    @NotNull
     private double steamPrice;
+    @NotNull
     private String steamHref;
+    @NotNull
     private String imageHref;
 
     public TableString(String name, double buffPrice, double steamPrice, String imageHref) {
@@ -26,47 +42,6 @@ public class TableString {
     }
 
     public TableString() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getBuffPrice() {
-        return buffPrice;
-    }
-
-    public double getSteamPrice() {
-        return steamPrice;
-    }
-
-    public String getSteamHref() {
-        return steamHref;
-    }
-
-    public String getImageHref() {
-        return imageHref;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setBuffPrice(double buffPrice) {
-        this.buffPrice = buffPrice;
-    }
-
-    public void setSteamPrice(double steamPrice) {
-        this.steamPrice = steamPrice;
-    }
-
-
-    public void setSteamHref(String steamHref) {
-        this.steamHref = steamHref;
-    }
-
-    public void setImageHref(String imageHref) {
-        this.imageHref = imageHref;
     }
 
 

@@ -1,5 +1,8 @@
 package com.example.parser.entity;
 
+import lombok.Data;
+
+@Data
 public class Resale {
     private String name;
     private double percent;
@@ -17,19 +20,4 @@ public class Resale {
     public Resale() {
     }
 
-    public double getPercent() {
-        return percent;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getFirstMarket() {
-        return firstMarket;
-    }
-
-    public String getSecondMarket() {
-        return secondMarket;
-    }
 }
