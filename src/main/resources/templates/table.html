@@ -171,12 +171,12 @@
         <tr th:if="${results==null}">
             <td colspan="5" th:text="${message}"></td>
         </tr>
-        <tr th:each="str : ${results}">
+        <tr  th:each="str : ${results}">
             <td style="width:350px"><a th:href="@{${str.steamHref}}">[[${str.name}]]</a></td>
             <td style="width:250px"><img th:src="@{${str.imageHref}}" width="250" height="100" alt=""/></td>
             <td style="width:75px"><span th:text="${str.buffPrice}"> Buff price </span></td>
             <td style="width:75px"><span th:text="${str.steamPrice}"> Steam price </span></td>
-            <td style="width:125px"><img th:src="@{/iconSave.png}" width="125" height="100"></td>
+            <td onclick="window.location= increaseCounter()" style="width:125px"><img th:src="@{/iconSave.png}" width="125" height="100"></td>
         </tr>
         </tbody>
     </table>
@@ -192,5 +192,13 @@
         rangeValueElement.innerHTML = newValue;
     }
 </script>
+<script>
+    let counter = 0;
+    function increaseCounter() {
+        counter++;
+        return counter;
+    }
+</script>
+
 </body>
 </html>
