@@ -22,6 +22,12 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Override
+    public boolean isUserExist(String username) {
+        return userRepository.findByLogin(username).isPresent();
+    }
+
     @Override
     public User getUserByLogin(String username) {
         return userRepository.findByLogin(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
