@@ -42,8 +42,7 @@ public class SecurityConfig {
                         (request, response, exception) -> getEmptyTokenResponse(response)
                 ))
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("/main/admin", "/admin/**").hasRole("ADMIN")
-                        .requestMatchers("main/security", "/book", "/book/**").authenticated()
+                        .requestMatchers("/table","/sort").authenticated()
                         .anyRequest().permitAll())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
