@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -42,18 +43,6 @@ public class TableString {
     }
 
     public TableString() {
-    }
-
-
-    @Override
-    public String toString() {
-        return "TableString{" +
-                "name='" + name + '\'' +
-                ", buffPrice=" + buffPrice +
-                ", steamPrice=" + steamPrice +
-                ", steamHref='" + steamHref + '\'' +
-                ", imageHref='" + imageHref + '\'' +
-                '}';
     }
 
     public Resale findMarketsWithMaxPercent() {

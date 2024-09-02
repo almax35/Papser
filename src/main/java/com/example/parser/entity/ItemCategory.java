@@ -1,11 +1,14 @@
 package com.example.parser.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 @Component
+@Data
 public class ItemCategory {
     private final ArrayList<String> categoryWeapon;
     private final ArrayList<String> categoryType;
@@ -56,11 +59,4 @@ public class ItemCategory {
         Collections.addAll(categoryType, "knife", "hands", "sticker", "type_customplayer");
     }
 
-    public ArrayList<String> getCategoryWeapon() {
-        return categoryWeapon;
-    }
-
-    public ArrayList<String> getCategoryType() {
-        return categoryType;
-    }
 }
