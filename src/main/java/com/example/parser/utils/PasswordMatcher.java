@@ -2,6 +2,7 @@ package com.example.parser.utils;
 
 
 import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -15,5 +16,8 @@ import static java.lang.annotation.ElementType.TYPE;
 @Target(TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordMatcher {
+    String message() default "Введённые пароли не совпадают";
+    Class<?>[] groups() default {};
 
+    Class<? extends Payload>[] payload() default {};
 }

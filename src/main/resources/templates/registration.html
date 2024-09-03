@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="error_handling.js"> </script>
   <title>Регистрация</title>
   <style>
     body {
@@ -67,7 +68,7 @@
 <body>
 <div class="container">
   <h2>Регистрация</h2>
-  <form action="/registration" method="post">
+  <form id="registration-form" th:object="${userRegistrationDto}" action="/registration" method="post">
     <div>
       <label for="login">Логин (Email):</label>
       <input type="email" id="login" name="login" required>
@@ -82,6 +83,7 @@
     </div>
     <button type="submit">Зарегистрироваться</button>
   </form>
+  <div id="error-message"></div>
 </div>
 </body>
 </html>

@@ -1,13 +1,11 @@
 package com.example.parser.controller;
 
 import com.example.parser.dto.JwtRequest;
-import com.example.parser.dto.JwtResponse;
 import com.example.parser.dto.UserRegistrationDto;
 import com.example.parser.service.auth.AuthService;
 import com.example.parser.service.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +17,13 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/auth")
-    public String creatAuthToken(@RequestParam String login, @RequestParam String password) throws BadCredentialsException{
-        String token=authService.getToken(new JwtRequest(login,password));
+    public String creatAuthToken(@Valid @ModelAttribute("jwtToken") JwtRequest jwtRequest) throws BadCredentialsException{
+        String token=authService.getToken(jwtRequest);
         return "redirect:/table";
     }
     @PostMapping("/registration")
-    public String createUser(@RequestParam String login, @RequestParam String password,@RequestParam String verifyPassword) {
-        userService.save(new UserRegistrationDto(login,password,verifyPassword));
+    public String createUser(@Valid @ModelAttribute("userRegistrationDto") UserRegistrationDto userRegistrationDto) {
+        userService.save(userRegistrationDto);
         return "redirect:/table";
     }
     @GetMapping("/registration")
