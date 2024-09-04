@@ -12,8 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
-                // Регистрация успешна
-                // ...
+
             } else {
                 const errorData = await response.json();
                 errorMessageDiv.textContent = errorData.error;
