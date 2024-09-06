@@ -5,13 +5,15 @@ import com.example.parser.entity.Resale;
 import com.example.parser.entity.TableString;
 import com.example.parser.entity.ValuteCourse;
 import com.example.parser.service.buff.BuffService;
+import com.example.parser.utils.TableStringMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.ui.Model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class MainService {
@@ -84,6 +86,33 @@ public class MainService {
             }
         }
         return resale;
+    }
+    public void searchItems(String name,double minPrice, double maxPrice, int quantity,String type, Model model) throws IOException, InterruptedException {
+        ArrayList<TableString> tableStrings;
+        if (Objects.equals(name, "")) {
+            tableStrings = (ArrayList<TableString>) this.searchWithParams(minPrice, maxPrice, quantity, type);
+            model.addAttribute("maxPercentage", this.findMaxPercentageAtAll());
+            if (tableStrings == null) {
+                model.addAttribute("message", "Не удалось найти предметы по заданным параметрам поиска");
+            }
+        } else {
+            tableStrings = (ArrayList<TableString>) this.searchWithName(name);
+            model.addAttribute("maxPercentage", this.findMaxPercentageAtAll());
+            if (tableStrings == null) {
+                model.addAttribute("message", "Не удалось найти предмет с заданным названием");
+            }
+        }
+        model.addAttribute("results", tableStrings);
+    }
+
+    public String searchItemsAndReturnStringOfItems(String name,double minPrice, double maxPrice, int quantity,String type) throws IOException, InterruptedException {
+        ArrayList<TableString> tableStrings;
+        if (Objects.equals(name, "")) {
+            tableStrings = (ArrayList<TableString>) this.searchWithParams(minPrice, maxPrice, quantity, type);
+        } else {
+            tableStrings = (ArrayList<TableString>) this.searchWithName(name);
+        }
+        return new TableStringMapper().convertToEntity(tableStrings);
     }
 
     public List<TableString> getStrings() {

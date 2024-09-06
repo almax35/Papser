@@ -42,7 +42,6 @@ public class SecurityConfig {
                         (request, response, exception) -> getEmptyTokenResponse(response)
                 ))
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("/table","/sort").authenticated()
                         .anyRequest().permitAll())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
