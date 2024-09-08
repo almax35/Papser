@@ -1,11 +1,11 @@
 package com.example.parser.service.buff;
 
 
+import com.example.parser.config.ConfProperties;
 import com.example.parser.entity.BuffItem;
 import com.example.parser.entity.ItemCategory;
 import com.example.parser.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -21,14 +21,11 @@ import java.util.List;
 public class BuffService implements IService {
     private final BuffJsonParser buffJsonParser;
     private final ItemCategory category;
-    @Value("${cookieBuff}")
-    private final String cookie;
 
     @Autowired
     public BuffService(BuffJsonParser buffJsonParser, ItemCategory category) {
         this.buffJsonParser = buffJsonParser;
         this.category = category;
-        cookie = null;
     }
 
     public BuffItem searchByName(String name) throws InterruptedException, IOException {
@@ -37,7 +34,7 @@ public class BuffService implements IService {
 
         HttpRequest request1 = HttpRequest
                 .newBuilder()
-                .setHeader("Cookie", cookie)
+                .setHeader("Cookie", ConfProperties.getProperty("buff.cookie"))
                 .uri(URI.create("https://buff.163.com/api/market/goods?game=csgo&page_num=1&quality=normal&search=" + encodedString))
                 .GET()
                 .build();
@@ -66,7 +63,7 @@ public class BuffService implements IService {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .setHeader("Cookie", cookie)
+                .setHeader("Cookie", ConfProperties.getProperty("buff.cookie"))
                 .uri(URI.create(uri.toString()))
                 .GET()
                 .build();
